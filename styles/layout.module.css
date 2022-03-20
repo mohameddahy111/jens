@@ -1,0 +1,26 @@
+.Toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  margin-left: 30px;
+}
+.logo a > h1 {
+  color: #ffffff;
+  font-size: 3rem;
+}
+.link {
+  display: flex;
+}
+.link a {
+  color: #ffffff;
+  padding-right: 30px;
+}
+.main{
+  min-height: 90vh;
+}
+.footer{
+  text-align: center;
+
+}
