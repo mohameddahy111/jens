@@ -11,3 +11,7 @@
 2. create database
 3. fetsh data from sanity
 4. darkMode
+# 3rd dahy
+1. slug page 
+2. add to cart handler
+3. cart page 
