@@ -1,15 +1,24 @@
 import { SnackbarProvider } from 'notistack';
 import '../styles/globals.css';
-import  {StoreProvider}  from '../utiles/Store';
+import { StoreProvider } from '../utiles/Store';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
 
-function MyApp({ Component, pageProps }) {
+const clientSideEmotionCache = createCache({ key: 'css' });
+function MyApp({
+  Component,
+  pageProps,
+  emotionCache = clientSideEmotionCache,
+}) {
   return (
-    <SnackbarProvider anchorOrigin={{vertical:'top' , horizontal:'center'}} >
-    <StoreProvider>
-      <Component {...pageProps} />
-    </StoreProvider>
-    </SnackbarProvider>
+    <CacheProvider value={emotionCache}>
 
+    <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+      <StoreProvider>
+        <Component {...pageProps} />
+      </StoreProvider>
+    </SnackbarProvider>
+    </CacheProvider>
   );
 }
 

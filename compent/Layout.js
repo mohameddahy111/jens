@@ -17,6 +17,7 @@ import styles from '../styles/layout.module.css';
 import { Store } from '../utiles/Store';
 import jsCookie from 'js-cookie';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import Head from 'next/head';
 
 export default function Layout({ children, title }) {
   const { state, dispatch } = useContext(Store);
@@ -59,6 +60,9 @@ export default function Layout({ children, title }) {
   };
   return (
     <div>
+      <Head>
+        <title> {title ? `${title}-jens ` : 'jens'}</title>
+      </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar position='static'>
