@@ -17,15 +17,15 @@ export default function login() {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const submitHandler = () => {};
+  const submitHandler = ({email , password}) => {};
   return (
     <div>
-      <Layout>
+      <Layout title={'login'}>
         <Typography component={'h1'} variant='h1' align='center' m={6}>
           login
         </Typography>
         <form
-          style={{ width: '60%', margin: 'auto' }}
+          style={{ width: '80%', margin: 'auto' }}
           onSubmit={handleSubmit(submitHandler)}
         >
           <List>

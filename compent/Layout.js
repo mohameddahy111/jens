@@ -18,12 +18,14 @@ import { Store } from '../utiles/Store';
 import jsCookie from 'js-cookie';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import Head from 'next/head';
+import Profil from './Profil'
 
 export default function Layout({ children, title }) {
   const { state, dispatch } = useContext(Store);
   const {
     darkMode,
     cart: { cartItems },
+    userInfo,
   } = state;
   const theme = createTheme({
     typography: {
@@ -100,13 +102,17 @@ export default function Layout({ children, title }) {
                   )}
                 </Link>
               </NextLink>
-              <NextLink href={'/login'} passHref>
-                <Link>
-                  <Typography component={'h1'} variant='h1'>
-                    login
-                  </Typography>
-                </Link>
-              </NextLink>
+              {userInfo ? (
+                <Profil text={userInfo.name} />
+              ) : (
+                <NextLink href={'/login'} passHref>
+                  <Link>
+                    <Typography component={'h1'} variant='h1'>
+                      login
+                    </Typography>
+                  </Link>
+                </NextLink>
+              )}
             </Box>
           </Toolbar>
         </AppBar>

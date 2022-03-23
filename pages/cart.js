@@ -34,7 +34,9 @@ const cartScreen = () => {
   const { state, dispatch } = useContext(Store);
   const {
     cart: { cartItems },
+    userInfo,
   } = state;
+  
   const router = useRouter();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const updateHandelCart = async (item, quantity) => {
@@ -62,6 +64,13 @@ const cartScreen = () => {
     dispatch({ type: 'REMOVE_ITEM', payload: item });
     closeSnackbar();
     enqueueSnackbar(`${item.name} is removed`, { variant: 'error' });
+  };
+  const checkedHandler = () => {
+    if (userInfo) {
+      router.push('/shipping');
+    }else{
+      router.push('/login')
+    }
   };
   const total = cartItems.reduce((a, c) => a + c.quantity * c.price, 0);
   const countItem = cartItems.reduce((a, c) => a + c.quantity, 0);
@@ -198,7 +207,7 @@ const cartScreen = () => {
                         <Button
                           fullWidth
                           variant='contained'
-                          onClick={() => router.push('/login')}
+                          onClick={checkedHandler}
                         >
                           <Typography component={'h6'} variant='h6'>
                             check out

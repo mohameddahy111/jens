@@ -51,6 +51,7 @@ export default function ProductScreen(props) {
     fetchData();
   }, []);
   const handlerAddToCard = async () => {
+    closeSnackbar()
     const exisetItem = cart.cartItems.find(x => x._id === item._id);
     const quantity = exisetItem ? exisetItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/product/${item._id}`);
@@ -78,7 +79,7 @@ export default function ProductScreen(props) {
     enqueueSnackbar(`${item.name} add to cart`, { variant: 'success' });
   };
   return (
-    <Layout>
+    <Layout title={item?.name}>
       {loading ? (
         <CircularProgress />
       ) : error ? (
