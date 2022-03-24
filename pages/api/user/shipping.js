@@ -1,5 +1,4 @@
 import nc from 'next-connect';
-import bcrypt from 'bcryptjs';
 import axios from 'axios';
 import config from '../../../utiles/config';
 import { signToken } from '../../../utiles/auth';
@@ -13,12 +12,13 @@ handler.post(async (req, res) => {
   const createMutations = [
     {
       create: {
-        _type: 'user',
+        _type: 'shipping',
         name: req.body.name,
         email: req.body.email,
         mobile: req.body.mobile,
-        password: bcrypt.hashSync(req.body.password),
-        isAdmin: false,
+        address: req.body.address,
+        building: req.body.building,
+        floor: req.body.floor,
       },
     },
   ];
@@ -38,7 +38,9 @@ handler.post(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     mobile: req.body.mobile,
-    isAdmin: false,
+    address: req.body.address,
+    building: req.body.building,
+    floor: req.body.floor,
   };
   const token = signToken(user);
   res.send({ ...user, token });

@@ -91,7 +91,7 @@ export default function Layout({ children, title }) {
                     >
                       <IconButton>
                         <ShoppingCartOutlinedIcon
-                          style={{ color: 'white', fontSize: '30px' }}
+                          style={{ color: 'white', fontSize: '40px' }}
                         />
                       </IconButton>
                     </Badge>

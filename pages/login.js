@@ -6,18 +6,51 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
 import Layout from '../compent/Layout';
 import NextLink from 'next/link';
 import { Controller, useForm } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
+import axios from 'axios';
+import jsCookie from 'js-cookie';
+import { Store } from '../utiles/Store';
+import { useRouter } from 'next/router';
 
 export default function login() {
+  const router = useRouter();
+  const { state, dispatch } = useContext(Store);
+  const {
+    userInfo,
+    cart: { cartItems },
+  } = state;
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const {
     control,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const submitHandler = ({email , password}) => {};
+  // useEffect((userInfo)=>{
+  //   router.push('/')
+  // },[router , userInfo])
+
+  const submitHandler = async ({ email, password }) => {
+    closeSnackbar();
+    try {
+      const { data } = await axios.post('/api/user/login', {
+        email,
+        password,
+      });
+      dispatch({ type: 'USER_LOGIN', payload: data });
+      jsCookie.set('userInfo', JSON.stringify(data));
+      if (cartItems.length > 0) {
+        router.push('/shipping');
+      }
+      router.push('/');
+    } catch (err) {
+      enqueueSnackbar(err.message, { variant: 'error' });
+    }
+  };
+
   return (
     <div>
       <Layout title={'login'}>
@@ -94,7 +127,7 @@ export default function login() {
             </ListItem>
             <ListItem>
               <Typography component={'h6'} variant='h6'>
-                 don't have account ?{' '}
+                don't have account ?{' '}
                 <NextLink href={'/register'} passHref>
                   <Link>register</Link>
                 </NextLink>

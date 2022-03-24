@@ -18,13 +18,16 @@ import { useRouter } from 'next/router';
 
 export default function register() {
   const { state, dispatch } = useContext(Store);
-  const { userInfo } = state;
+  const {
+    userInfo,
+    cart: { cartItems },
+  } = state;
   const router = useRouter();
-  useEffect(() => {
-    if (userInfo) {
-      router.push('/');
-    }
-  }, [router , userInfo]);
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     router.push('/');
+  //   }
+  // }, [router, userInfo]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const {
     control,
@@ -51,6 +54,11 @@ export default function register() {
       });
       dispatch({ type: 'USER_LOGIN', payload: data });
       jsCookie.set('userInfo', JSON.stringify(data));
+      if (cartItems.length > 0) {
+        router.push('/shipping');
+      } else {
+        router.push('/');
+      }
     } catch (err) {
       enqueueSnackbar(err.message, { variant: 'error' });
     }

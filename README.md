@@ -26,3 +26,9 @@
 4. npm i bcryptjs
 5. create .env
 6. login & logout case
+# 6rd day
+1. create login api
+2. create shiiping page
+3. create CheckRethult compent
+4. shipping schema
+

@@ -22,7 +22,7 @@ export default function BasicMenu({ text }) {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div style={{ display: 'flex', alignItems: 'center' ,flexDirection:'column' , justifyContent :'center' }}>
       <Button
         id='basic-button'
         aria-controls={open ? 'basic-menu' : undefined}

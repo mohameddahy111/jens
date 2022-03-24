@@ -12,6 +12,8 @@
 }
 .link {
   display: flex;
+  align-items: center;
+  margin-right: 50px;
 }
 .link a {
   color: #ffffff;
