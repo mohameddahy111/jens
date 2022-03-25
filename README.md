@@ -31,4 +31,7 @@
 2. create shiiping page
 3. create CheckRethult compent
 4. shipping schema
+# 7rd day
+1. Correct mistakes
+2. create pay page
 

@@ -1,4 +1,12 @@
-import { Button, List, ListItem, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  InputLabel,
+  List,
+  ListItem,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React, { useContext, useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import CheckRethult from '../compent/CheckRethult';
@@ -13,13 +21,12 @@ export default function shipping() {
   const router = useRouter();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { state, dispatch } = useContext(Store);
-  const { userInfo , shipping } = state;
-  useEffect(()=>{
+  const { userInfo, shipping } = state;
+  useEffect(() => {
     if (!userInfo) {
-      router.push('/')
-      
+      router.push('/');
     }
-  })
+  });
 
   const {
     handleSubmit,
@@ -33,6 +40,7 @@ export default function shipping() {
     address,
     building,
     floor,
+    nots,
   }) => {
     try {
       const { data } = await axios.post('/api/user/shipping', {
@@ -42,6 +50,7 @@ export default function shipping() {
         address,
         building,
         floor,
+        nots,
       });
       dispatch({ type: 'SHIPPING_USER', payload: data });
       jsCookie.set('shipping', JSON.stringify(data));
@@ -77,6 +86,7 @@ export default function shipping() {
                     inputProps={{ type: 'text' }}
                     id='name'
                     label={userInfo ? '' : 'name'}
+                    placeholder={'Full name'}
                     error={Boolean(errors.name)}
                     helperText={
                       errors.name
@@ -90,7 +100,8 @@ export default function shipping() {
                 )}
               />
             </ListItem>
-            <ListItem>
+            <ListItem >
+                
               <Controller
                 name='email'
                 control={control}
@@ -104,6 +115,7 @@ export default function shipping() {
                     fullWidth
                     id='email'
                     inputProps={{ type: 'email' }}
+                    placeholder={'Email'}
                     label={userInfo ? '' : 'Email'}
                     error={Boolean(errors.email)}
                     helperText={
@@ -118,6 +130,7 @@ export default function shipping() {
                 )}
               />
             </ListItem>
+            
             <ListItem>
               <Controller
                 name='mobile'
@@ -133,6 +146,7 @@ export default function shipping() {
                     id='mobile'
                     inputProps={{ type: 'text' }}
                     label={userInfo ? '' : 'mobile'}
+                    placeholder={'Mobile'}
                     error={Boolean(errors.mobile)}
                     helperText={
                       errors.mobile
@@ -145,6 +159,7 @@ export default function shipping() {
                   />
                 )}
               />
+
             </ListItem>
             <ListItem>
               <Controller
@@ -225,6 +240,36 @@ export default function shipping() {
                         ? errors.floor.type === 'pattern'
                           ? 'Floor is vaild'
                           : 'Floor isrequired '
+                        : null
+                    }
+                    {...field}
+                  />
+                )}
+              />
+            </ListItem>
+            <ListItem>
+              <Controller
+                name='nots'
+                defaultValue={shipping ?shipping.nots :'' }
+                control={control}
+                rules={{
+                  minLength: 2,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    id='nots'
+                    inputProps={{ type: 'text' }}
+                    fullWidth
+                    error={Boolean(errors.nots)}
+                    label={shipping ? " " : 'Delivery notes' }
+                    placeholder={'Delivery notes'}
+                    size='small'
+                    variant='filled'
+                    helperText={
+                      errors.nots
+                        ? errors.nots.type === 'minlength'
+                          ? 'nots not vaild '
+                          : null
                         : null
                     }
                     {...field}

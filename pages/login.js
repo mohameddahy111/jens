@@ -29,9 +29,6 @@ export default function login() {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  // useEffect((userInfo)=>{
-  //   router.push('/')
-  // },[router , userInfo])
 
   const submitHandler = async ({ email, password }) => {
     closeSnackbar();

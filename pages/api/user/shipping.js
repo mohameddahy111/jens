@@ -19,6 +19,7 @@ handler.post(async (req, res) => {
         address: req.body.address,
         building: req.body.building,
         floor: req.body.floor,
+        nots: req.body.nots,
       },
     },
   ];
@@ -41,6 +42,7 @@ handler.post(async (req, res) => {
     address: req.body.address,
     building: req.body.building,
     floor: req.body.floor,
+    nots: req.body.nots,
   };
   const token = signToken(user);
   res.send({ ...user, token });

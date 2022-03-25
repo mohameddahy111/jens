@@ -32,7 +32,12 @@ export default {
     {
       name: 'floor',
       title: 'Floor',
-      type: 'number',
+      type: 'string',
+    },
+    {
+      name: 'nots',
+      title: 'Nots',
+      type: 'string',
     },
   ],
 };

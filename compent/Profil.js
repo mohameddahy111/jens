@@ -18,7 +18,9 @@ export default function BasicMenu({ text }) {
   };
   const logoutHandler = () => {
     dispatch({ type: 'USER_LOGOUT' });
-    jsCookie.remove('userInfo');
+    jsCookie.remove('userInfo')
+    jsCookie.remove('cartItems')
+    jsCookie.remove('shipping')
   };
 
   return (
